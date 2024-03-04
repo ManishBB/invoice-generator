@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function ProductForm() {
     const [products, setProducts] = useState([
-        { id: 1, name: "", quantity: 0, rate: 0 },
+        { id: 1, name: "", quantity: "", rate: "" },
     ]);
     const [total, setTotal] = useState(0);
     const [gst, setGst] = useState(0);
@@ -15,8 +15,8 @@ function ProductForm() {
         const newProduct = {
             id: products.length + 1,
             name: "",
-            quantity: 0,
-            rate: 0,
+            quantity: "",
+            rate: "",
         };
         setProducts([...products, newProduct]);
     };
