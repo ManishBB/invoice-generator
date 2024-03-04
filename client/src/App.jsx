@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
 
 function App() {
     const isUserLoggedIn =
@@ -46,7 +47,9 @@ function App() {
                 ></Route>
                 <Route
                     path="/invoice"
-                    element={<PdfPage />}
+                    element={
+                        isUserLoggedIn ? <PdfPage /> : <Navigate to="/login" />
+                    }
                     errorElement={<NotFound />}
                 ></Route>
                 <Route
@@ -57,7 +60,12 @@ function App() {
             </>
         )
     );
-    return <RouterProvider router={router} />;
+    return (
+        <div>
+            <Navbar />
+            <RouterProvider router={router} />
+        </div>
+    );
 }
 
 export default App;

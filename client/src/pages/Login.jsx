@@ -37,6 +37,14 @@ function Login() {
             dispatch(login(response.data.loggedInUser));
 
             localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem(
+                "userData",
+                JSON.stringify(response.data.loggedInUser)
+            );
+            localStorage.setItem(
+                "accessToken",
+                JSON.stringify(response.data.accessToken)
+            );
 
             navigate("/");
 
@@ -51,7 +59,7 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center align-center min-h-screen">
             <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
                 <h3 className="text-2xl font-bold text-center">Login</h3>
                 <form onSubmit={handleSubmit}>

@@ -6,18 +6,7 @@ function NotFound() {
     const message = location?.state;
 
     return (
-        <div
-            style={{
-                width: "100vw",
-                height: "100vh",
-                display: "flex",
-                textAlign: "center",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "#474444",
-                fontSize: "30px",
-            }}
-        >
+        <div className="w-screen h-screen flex justify-center items-center text-center text-gray-700 text-2xl">
             {message ? message : "404 | Not Found | Bad Request"}
         </div>
     );

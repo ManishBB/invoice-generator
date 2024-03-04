@@ -17,11 +17,19 @@ function PdfPage({ products, totalWithGst }) {
 
     const generatePDF = async () => {
         setLoading(true);
+        console.log(pdfData);
         try {
             const response = await axios.post(
                 `${conf.baseUrl}/invoice/create-invoice`,
                 { pdfData },
-                { responseType: "blob" }
+                {
+                    headers: {
+                        Authorization: `Bearer ${JSON.parse(
+                            localStorage.getItem("accessToken")
+                        )}`,
+                    },
+                    responseType: "blob",
+                }
             );
             const pdfBlob = new Blob([response.data], {
                 type: "application/pdf",
