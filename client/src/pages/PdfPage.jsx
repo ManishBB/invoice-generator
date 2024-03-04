@@ -66,7 +66,7 @@ function PdfPage({ products, totalWithGst }) {
                             PDF Preview
                         </h3>
                         <iframe
-                            src={pdfData}
+                            src={pdfData} // Ensure this uses the updated pdfData state
                             width="100%"
                             height="500px"
                         ></iframe>
