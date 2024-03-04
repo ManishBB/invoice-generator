@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import conf from "../config/config";
 import axios from "axios";
 import { login } from "../store/authSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -14,20 +16,19 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle signup logic here...
 
         if (!email) {
-            alert("Please enter your email address!");
+            toast.error("Please enter your email address!");
             return;
         }
 
         if (!conf.emailRegex.test(email)) {
-            alert("Please enter your email address correctly!");
+            toast.error("Please enter your email address correctly!");
             return;
         }
 
         if (!password) {
-            alert("Please enter your password!");
+            toast.error("Please enter your password!");
             return;
         }
 
@@ -62,9 +63,9 @@ function Login() {
             setEmail("");
             setPassword("");
         } catch (error) {
-            alert(
-                "Email or password is incorrect! Please enter correct credentials..."
-            );
+            const errorMessage =
+                error.response?.data?.error || "An unexpected error occurred!";
+            toast.error(errorMessage);
         }
     };
 
@@ -115,6 +116,19 @@ function Login() {
                     </p>
                 </form>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Bounce
+            />
         </div>
     );
 }
