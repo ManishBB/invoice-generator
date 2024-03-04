@@ -19,8 +19,18 @@ function Register() {
             return;
         }
 
+        if (!email) {
+            alert("Please enter your email address!");
+            return;
+        }
+
         if (!conf.emailRegex.test(email)) {
             alert("Please enter your email address correctly!");
+            return;
+        }
+
+        if (!password) {
+            alert("Please enter your password!");
             return;
         }
 
