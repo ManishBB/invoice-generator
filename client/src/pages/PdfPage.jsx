@@ -3,6 +3,8 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import conf from "../config/config";
 import styles from "./loader.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PdfPage({ products, totalWithGst }) {
     const [loading, setLoading] = useState(false);
@@ -39,7 +41,9 @@ function PdfPage({ products, totalWithGst }) {
             setPdfData(pdfUrl);
             setCurrentPage("showPdf");
         } catch (error) {
-            console.error("Error generating PDF:", error);
+            const errorMessage =
+                error.response?.data?.error || "An unexpected error occurred!";
+            toast.error(errorMessage);
         }
         setLoading(false);
     };
@@ -86,6 +90,19 @@ function PdfPage({ products, totalWithGst }) {
                     </div>
                 )}
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Bounce
+            />
         </div>
     );
 }
