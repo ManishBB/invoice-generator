@@ -11,6 +11,22 @@ function ProductForm() {
 
     const navigate = useNavigate();
 
+    const validateProducts = () => {
+        const invalidProduct = products.some(
+            (product) =>
+                !product.name.trim() ||
+                product.quantity === "" ||
+                product.rate === ""
+        );
+
+        if (invalidProduct) {
+            alert("Please fill in all fields for each product.");
+            return false; // Validation failed
+        }
+
+        return true; // Validation passed
+    };
+
     const addProduct = () => {
         const newProduct = {
             id: products.length + 1,
@@ -29,10 +45,14 @@ function ProductForm() {
     };
 
     const handleNextClick = () => {
+        if (!validateProducts()) return;
+
         navigate("/invoice", { state: { products, total, gst, totalWithGst } });
     };
 
     const calculateTotal = () => {
+        if (!validateProducts()) return;
+
         const totalAmount = products.reduce((acc, curr) => {
             return acc + curr.quantity * curr.rate;
         }, 0);
