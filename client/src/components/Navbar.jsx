@@ -24,7 +24,7 @@ function Navbar() {
             </div>
             {isUserLoggedIn && (
                 <div
-                    className="logout flex items-center"
+                    className="logout flex items-center cursor-pointer"
                     onClick={handleLogout}
                 >
                     <FiLogOut className="mr-2" />
